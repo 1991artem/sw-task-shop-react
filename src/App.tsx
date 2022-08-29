@@ -1,8 +1,9 @@
 import { useQuery, gql } from '@apollo/client';
-import { ICategories, IProductPrice } from './component/interfaces';
+import { ICategories, IProductPrice, IProduct } from './component/interfaces';
 import Header from './component/header/Header';
 import Main from './component/main/Main';
 import { useState } from 'react';
+import ProductCardPage from './component/card/ProductCardPage';
 
 const query = gql`
             query   {
@@ -44,15 +45,10 @@ export default function App() {
   const {loading, error,data} = useQuery(query);
   const [categoriesName, setCategoriesName] = useState('all');
   const [currency, setCurrency] = useState('USD');
+  const [product, setProduct] = useState('');
 
   if(loading) return <div><p>...Loading</p></div>;
   if(error) return <div><p>{`Error:  ${error.message}`}</p></div>;
-
-  let dataFromServer: ICategories[] = data.categories;
-
-  let categories = dataFromServer.map((element)=>{
-    return element.name
-  });
 
   const sortData = (categoriesName: string) => {
     let selectCategories: ICategories | {} = {}
@@ -63,7 +59,6 @@ export default function App() {
     });
     return selectCategories
   }
-  let selectDataItem: ICategories = sortData(categoriesName) as ICategories;
 
   const filterConfigProductForMainCatalog = (data: ICategories) => {
     let filterProductArray: { name: string; img: string; price: {}; }[] = [];
@@ -71,6 +66,7 @@ export default function App() {
       let filterProduct = {
         name: product.name,
         img: product.gallery[0],
+        id:product.id,
         price: {}
       };
       product.prices.forEach((curr: IProductPrice) => {
@@ -87,7 +83,21 @@ export default function App() {
     return filterProductArray;
   }
 
-  let filterProductArrayForMain = filterConfigProductForMainCatalog(selectDataItem);
+  // const filterProductForShowCard = (data: ICategories): IProduct | null  =>{
+  //   let choiseProduct: IProduct | null = null;
+  //   if(product){
+  //     data.products?.forEach((prod:IProduct)=>{
+  //       if(prod.id === product){
+  //         choiseProduct = prod;
+  //       }
+  //     })
+  //     return choiseProduct
+  //   }
+  //   return choiseProduct;
+  // }
+
+
+
 
   const checkCategories = (value: string) =>{
     setCategoriesName(value)
@@ -96,10 +106,34 @@ export default function App() {
     setCurrency(value)
   }
 
+  const showProduct = (prod: string ) =>{
+    setProduct(prod)
+  }
+
+  const handlerHide = (e: Event) => {
+    if((e.target as HTMLElement).className !== "product-card"){
+        setProduct('')
+    }
+  }
+
+  document.body.addEventListener('click', handlerHide, true)
+
+  let dataFromServer: ICategories[] = data.categories;
+  let categories = dataFromServer.map((element)=>{
+    return element.name
+  });
+  let selectDataItem: ICategories = sortData(categoriesName) as ICategories;
+  let filterProductArrayForMain = filterConfigProductForMainCatalog(selectDataItem);
+
+  let productDataForCard = selectDataItem.products?.filter((prod:IProduct)=> prod.id === product)[0];
+
   return (
     <div className='wrapper'>
       <Header categories={categories} checkCategories={checkCategories} checkCurrency={checkCurrency}/>
-      <Main product={filterProductArrayForMain} categories={categoriesName}/>
+      {
+      product? <ProductCardPage cardData={productDataForCard}/> : <Main product={filterProductArrayForMain} categories={categoriesName} showProduct={showProduct}/>
+      }
+
     </div>
   );
 }

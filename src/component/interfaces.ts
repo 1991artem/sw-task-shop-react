@@ -29,6 +29,7 @@ export interface IProductPrice {
 export interface IProductForMain {
     name: string,
     img: string,
+    id: string,
     price: {
         value: number
         label: string;

@@ -5,7 +5,7 @@ export default function NavBar({categories, checkCategories}:any){
                 <ul>
                     {
                     categories.map((name: any)=>{
-                        return  <Link name={name} checkCategories={checkCategories}/>
+                        return  <Link name={name} checkCategories={checkCategories} key={Date.now()*Math.random()}/>
                     })
                     }
                 </ul>
