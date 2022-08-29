@@ -83,22 +83,6 @@ export default function App() {
     return filterProductArray;
   }
 
-  // const filterProductForShowCard = (data: ICategories): IProduct | null  =>{
-  //   let choiseProduct: IProduct | null = null;
-  //   if(product){
-  //     data.products?.forEach((prod:IProduct)=>{
-  //       if(prod.id === product){
-  //         choiseProduct = prod;
-  //       }
-  //     })
-  //     return choiseProduct
-  //   }
-  //   return choiseProduct;
-  // }
-
-
-
-
   const checkCategories = (value: string) =>{
     setCategoriesName(value)
   }
@@ -111,7 +95,7 @@ export default function App() {
   }
 
   const handlerHide = (e: Event) => {
-    if((e.target as HTMLElement).className !== "product-card"){
+    if((e.target as HTMLElement).className === "header"){
         setProduct('')
     }
   }
@@ -131,7 +115,7 @@ export default function App() {
     <div className='wrapper'>
       <Header categories={categories} checkCategories={checkCategories} checkCurrency={checkCurrency}/>
       {
-      product? <ProductCardPage cardData={productDataForCard}/> : <Main product={filterProductArrayForMain} categories={categoriesName} showProduct={showProduct}/>
+      product? <ProductCardPage cardData={productDataForCard} currency={currency}/> : <Main product={filterProductArrayForMain} categories={categoriesName} showProduct={showProduct}/>
       }
 
     </div>

@@ -3,13 +3,14 @@ import { IProduct } from '../interfaces';
 
 interface ICardData{
     cardData: IProduct | undefined;
+    currency: string;
 }
 
-export default function ProductCardPage({cardData}:ICardData){
+export default function ProductCardPage({cardData, currency}:ICardData){
     if(cardData){
         return(
             <div className="product-card">
-                <MainPlaceCard product={cardData}/>
+                <MainPlaceCard product={cardData} currency={currency}/>
             </div>
         )
     } else {

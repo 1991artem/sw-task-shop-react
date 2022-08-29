@@ -19,7 +19,8 @@ export interface IProduct {
 }
 
 export interface IProductPrice {
-    amount: number
+    amount: number;
+    __typename?: string;
     currency: {
         label: string;
         symbol: string
@@ -35,4 +36,26 @@ export interface IProductForMain {
         label: string;
         symbol: string
     }
+}
+
+export interface IAttributes{
+        id: string;
+        items: IProductAttributesItems[];
+        name: string;
+        type: string;
+        __typename: string;
+}
+
+export interface IProductAttributes{
+    attributes: IAttributes;
+}
+
+export interface IProductAttributesItems {
+    displayValue: string;
+    id: string;
+    value: string;
+}
+export interface IProductPriceItem {
+    price: IProductPrice[];
+    currency:string;
 }
