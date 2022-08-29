@@ -29,7 +29,7 @@ export default function Currency({checkCurrency}:any){
         <select className="header-active_currency" onChange={handleClick}>
             {
             currency.map(currency =>{
-                return <option value={currency.value} key={Date.now()*Math.random()}>{currency.sign}</option>
+                return <option value={currency.value} key={Date.now()*Math.random()}>{`${currency.sign} ${currency.value}`}</option>
             })
             }
         </select>

@@ -39,10 +39,12 @@ body{
   max-width: 1238px;
   min-width: 500px;
   padding: 0 101px;
-  width: 90vw;
+  width: 80vw;
 }
 
 .header {
+  max-width: 1238px;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -85,7 +87,7 @@ body{
   margin-left: 22px;
 }
 .header-active_currency{
-  width: 38px;
+  width: 68px;
   height: 29px;
   margin-top: 5.5px;
 }
