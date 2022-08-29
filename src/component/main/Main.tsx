@@ -1,11 +1,11 @@
 import Container from "./Container"
 import Title from "./Title"
 
-export default function Main({product, categories}: any){
+export default function Main({product, categories, showProduct}: any){
     return (
         <div className="main">
             <Title categoriesName={categories} />
-            <Container product={product}/>
+            <Container product={product} showProduct={showProduct}/>
         </div>
     )
 }
