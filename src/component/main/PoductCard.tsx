@@ -1,4 +1,6 @@
 import { IProductForMain } from '../interfaces';
+import { CartStorage } from '../CartStorage';
+
 interface IProductCard{
     product: IProductForMain;
     showProduct: (id: string)=> void
@@ -8,6 +10,11 @@ export default function ProductCart({product, showProduct}:IProductCard){
 
     const productCardOnClick = (id: string) => {
         showProduct(id)
+        CartStorage.selectProduct = {
+            id: '',
+            count: 1,
+            params: new Map()
+        };
     }
 
     return(

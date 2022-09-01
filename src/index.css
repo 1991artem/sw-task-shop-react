@@ -40,6 +40,7 @@ body{
   min-width: 500px;
   padding: 0 101px;
   width: 80vw;
+  height: auto;
 }
 
 .header {
@@ -248,4 +249,20 @@ body{
 .product-card-img-container_mini {
   height: 595px;
   width: 80px;
+}
+.dark-body{
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #1D1F22;
+  opacity: .3;
+}
+.mini-cart {
+  width: 325px;
+  height: 677px;
+  z-index: 1000;
+  opacity: 1;
+  background-color: aqua;
 }

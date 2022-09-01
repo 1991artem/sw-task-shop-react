@@ -59,3 +59,9 @@ export interface IProductPriceItem {
     price: IProductPrice[];
     currency:string;
 }
+
+export interface ICart {
+    id: string;
+    count: number;
+    params: Map<string, string>;
+}

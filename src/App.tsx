@@ -1,8 +1,8 @@
 import { useQuery, gql } from '@apollo/client';
-import { ICategories, IProductPrice, IProduct } from './component/interfaces';
+import { ICategories, IProductPrice, IProduct} from './component/interfaces';
 import Header from './component/header/Header';
 import Main from './component/main/Main';
-import { useEffect, useState } from 'react';
+import { useEffect, useState} from 'react';
 import ProductCardPage from './component/card/ProductCardPage';
 
 const query = gql`
@@ -40,15 +40,15 @@ const query = gql`
             `;
 
 
-
 export default function App() {
   const {loading, error,data} = useQuery(query);
   const [categoriesName, setCategoriesName] = useState('all');
   const [currency, setCurrency] = useState('USD');
   const [product, setProduct] = useState('');
+  const [miniCart, setMiniCart] = useState(false);
 
   useEffect(()=>{
-    setProduct('')
+    setProduct('');
   },[categoriesName])
 
 
@@ -91,8 +91,13 @@ export default function App() {
   const checkCategories = (value: string) =>{
     setCategoriesName(value)
   }
+
   const checkCurrency = (value: string) =>{
     setCurrency(value)
+  }
+
+  const showMiniCart = (value: boolean) =>{
+    setMiniCart(value)
   }
 
   const showProduct = (prod: string ) =>{
@@ -118,11 +123,10 @@ export default function App() {
 
   return (
     <div className='wrapper'>
-      <Header categories={categories} checkCategories={checkCategories} checkCurrency={checkCurrency}/>
+      <Header categories={categories} checkCategories={checkCategories} checkCurrency={checkCurrency}  showMiniCart={showMiniCart}/>
       {
-      product? <ProductCardPage cardData={productDataForCard} currency={currency}/> : <Main product={filterProductArrayForMain} categories={categoriesName} showProduct={showProduct}/>
+      product? <ProductCardPage cardData={productDataForCard} currency={currency}/> : <Main product={filterProductArrayForMain} categories={categoriesName} showProduct={showProduct} miniCart={miniCart}/>
       }
-
     </div>
   );
 }
