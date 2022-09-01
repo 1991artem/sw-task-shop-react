@@ -9,7 +9,6 @@ interface IProductCardInfo {
 }
 
 export default function ProductCardInfo({product, currency}:IProductCardInfo){
-    console.log(product.description)
     return(
         <div className="product-card-main-info">
             <h2 className="product-card-main-info-title">{product.name}</h2>

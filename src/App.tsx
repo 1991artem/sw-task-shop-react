@@ -2,7 +2,7 @@ import { useQuery, gql } from '@apollo/client';
 import { ICategories, IProductPrice, IProduct } from './component/interfaces';
 import Header from './component/header/Header';
 import Main from './component/main/Main';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProductCardPage from './component/card/ProductCardPage';
 
 const query = gql`
@@ -46,6 +46,11 @@ export default function App() {
   const [categoriesName, setCategoriesName] = useState('all');
   const [currency, setCurrency] = useState('USD');
   const [product, setProduct] = useState('');
+
+  useEffect(()=>{
+    setProduct('')
+  },[categoriesName])
+
 
   if(loading) return <div><p>...Loading</p></div>;
   if(error) return <div><p>{`Error:  ${error.message}`}</p></div>;

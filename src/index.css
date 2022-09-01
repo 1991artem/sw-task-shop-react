@@ -150,6 +150,7 @@ body{
 }
 .product-card {
   width: 100%;
+  margin-top: 80px;
   display: flex;
   flex-direction: row;
 }
@@ -225,4 +226,26 @@ body{
 .product-card-main-info-btn:hover{
   cursor: pointer;
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5)
+}
+.active {
+  background-color: darkgray;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5)
+}
+.product-card_mini-img img {
+  width: 79px;
+  height: 80px;
+}
+.product-card_mini-img img:hover{
+  cursor: pointer;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5)
+}
+.product-card-img-container{
+  height: 595px;
+  width: 730px;
+  display: flex;
+  flex-direction: row;
+}
+.product-card-img-container_mini {
+  height: 595px;
+  width: 80px;
 }

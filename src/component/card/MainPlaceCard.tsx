@@ -1,5 +1,6 @@
 import ProductCardInfo from "./ProductCardInfo";
 import { IProduct } from '../interfaces';
+import ProductImg from './ProductImg';
 
 interface IMainPlaceCard {
     product: IProduct;
@@ -9,7 +10,7 @@ interface IMainPlaceCard {
 export default function MainPlaceCard({product, currency}:IMainPlaceCard){
     return (
         <div className="product-card-page-main">
-            <div className="product-card-page-main_img"><img src={product.gallery[0]} alt={product.name} /></div>
+            <ProductImg product={product}/>
             <ProductCardInfo product={product} currency={currency}/>
         </div>
     )
