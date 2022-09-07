@@ -31,11 +31,12 @@ export interface IProductForMain {
     name: string,
     img: string,
     id: string,
-    price: {
-        value: number
-        label: string;
-        symbol: string
-    }
+    price: IPrice
+}
+export interface IPrice {
+    value: number
+    label: string;
+    symbol: string
 }
 
 export interface IAttributes{
@@ -64,4 +65,22 @@ export interface ICart {
     id: string;
     count: number;
     params: Map<string, string>;
+}
+
+export interface IStorePropsObj {
+    currency: [
+        (currency: string)=> void,
+        string
+    ];
+    product: [
+        (product: string)=> void,
+        IProduct | undefined
+    ];
+    categoriesName: [
+        (product: string)=> void,
+        string[],
+        string
+    ];
+    cart: ICart[];
+    productArrayForMain: IProductForMain[];
 }

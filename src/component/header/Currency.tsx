@@ -1,9 +1,17 @@
-export default function Currency({checkCurrency}:any){
+import { useContext, useState } from 'react';
+import {StoreContext} from '../../App';
+import { IStorePropsObj } from '../interfaces';
 
+
+export default function Currency(){
+    const {currency}: IStorePropsObj = useContext(StoreContext);
+    const [selectCurrency, setSelectCurrency] = useState('usd')
     const handleClick = (event:React.ChangeEvent):void =>{
-        checkCurrency(((event.target) as HTMLSelectElement).value);
+        currency[0](((event.target) as HTMLSelectElement).value);
+        setSelectCurrency(((event.target) as HTMLSelectElement).value)
+
     }
-    let currency = [
+    let currencyValue = [
         {
             value: 'USD',
             sign: '$'
@@ -26,10 +34,10 @@ export default function Currency({checkCurrency}:any){
         },
     ]
     return (
-        <select className="header-active_currency" onChange={handleClick}>
+        <select className="header-active_currency" onChange={handleClick} value={selectCurrency}>
             {
-            currency.map(currency =>{
-                return <option value={currency.value} key={Date.now()*Math.random()}>{`${currency.sign} ${currency.value}`}</option>
+            currencyValue.map(value =>{
+                return <option value={value.value} key={Date.now()*Math.random()}>{`${value.sign} ${value.value}`}</option>
             })
             }
         </select>

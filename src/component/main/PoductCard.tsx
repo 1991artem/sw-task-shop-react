@@ -1,27 +1,23 @@
-import { IProductForMain } from '../interfaces';
-import { CartStorage } from '../CartStorage';
+import { useContext } from 'react';
+import { IProductForMain, IStorePropsObj } from '../interfaces';
+import { StoreContext } from '../../App';
 
 interface IProductCard{
-    product: IProductForMain;
-    showProduct: (id: string)=> void
+    item: IProductForMain;
 }
 
-export default function ProductCart({product, showProduct}:IProductCard){
+export default function ProductCart({item}:IProductCard){
+    const {product}: IStorePropsObj = useContext(StoreContext)
 
     const productCardOnClick = (id: string) => {
-        showProduct(id)
-        CartStorage.selectProduct = {
-            id: '',
-            count: 1,
-            params: new Map()
-        };
+        product[0](id)
     }
 
     return(
-        <div className="main-container_product-card" onClick={()=>productCardOnClick(product.id)}>
-            <div className="main-container_product-card_img"><img src={product.img} alt={product.name} /></div>
-            <div><p>{product.name}</p></div>
-            <div><p>{`${product.price.value} ${product.price.symbol}`}</p></div>
+        <div className="main-container_product-card" onClick={()=>productCardOnClick(item.id)}>
+            <div className="main-container_product-card_img"><img src={item.img} alt={item.name} /></div>
+            <div><p>{item.name}</p></div>
+            <div><p>{`${item.price.value} ${item.price.symbol}`}</p></div>
         </div>
     )
 

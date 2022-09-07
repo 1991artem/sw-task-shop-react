@@ -1,16 +1,15 @@
-import { CartStorage } from "../CartStorage"
+import { useContext } from "react";
+import { ICart, IStorePropsObj } from '../interfaces';
+import { StoreContext } from '../../App';
 
-export default function BtnAddToCart(){
+interface IBtnAddToCart {
+    product: ICart
+}
+
+export default function BtnAddToCart({product}: IBtnAddToCart){
+    const {cart}: IStorePropsObj = useContext(StoreContext)
     const handleClick = () =>{
-        if(CartStorage.selectProduct.id){
-            CartStorage.cart.push(CartStorage.selectProduct);
-        }
-        CartStorage.selectProduct = {
-            id: '',
-            count: 1,
-            params: new Map()
-        };
-        console.log(CartStorage.cart)
+        if(product.count) cart.push(product);
     }
 
     return(

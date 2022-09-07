@@ -1,27 +1,44 @@
-import { IProduct, IAttributes } from '../interfaces';
+import { useContext } from 'react';
+import { IAttributes, IStorePropsObj, ICart } from '../interfaces';
 import BtnAddToCart from './BtnAddToCart';
 import ProductAttributes from './ProductAttributes';
 import ProductPrice from './ProductPrice';
+import { StoreContext } from '../../App';
 
-interface IProductCardInfo {
-    product: IProduct;
-    currency: string;
-}
+export default function ProductCardInfo(){
+    const {product}: IStorePropsObj = useContext(StoreContext)
+    let productToCart: ICart = {
+        id: product[1]?.id as string,
+        count: 0,
+        params: new Map()
+    };
 
-export default function ProductCardInfo({product, currency}:IProductCardInfo){
-    return(
-        <div className="product-card-main-info">
-            <h2 className="product-card-main-info-title">{product.name}</h2>
-            {
-                product.attributes.map((attributes:IAttributes)=>{
-                    return(
-                        <ProductAttributes attributes={attributes} key={Date.now()*Math.random()}/>
-                    )
-                } )
-            }
-            <ProductPrice price={product.prices} currency={currency}/>
-            <BtnAddToCart />
-            <div dangerouslySetInnerHTML={{__html: product.description}}></div>
-        </div>
+    const cardInfoHandler = (e: React.MouseEvent) => {
+        if((e.target as HTMLElement).getAttribute('data-value')){
+            productToCart.count = 1;
+            let attribute: string[] = ((e.target as HTMLElement).getAttribute('data-value') as string).split(';');
+            productToCart.params.set(attribute[0], attribute[1]);
+        }
+    }
+
+    if(product[1]){
+        return(
+            <div className="product-card-main-info" onClick={cardInfoHandler}>
+                <h2 className="product-card-main-info-title">{product[1].name}</h2>
+                {
+                    product[1].attributes.map((attributes:IAttributes)=>{
+                        return(
+                            <ProductAttributes attributes={attributes} key={Date.now()*Math.random()}/>
+                        )
+                    } )
+                }
+                <ProductPrice />
+                <BtnAddToCart product={productToCart}/>
+                <div dangerouslySetInnerHTML={{__html: product[1].description}}></div>
+            </div>
+        )
+    } else return (
+        <div className="product-card-main-info"></div>
     )
+
 }

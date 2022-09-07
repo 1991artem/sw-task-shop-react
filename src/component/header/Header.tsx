@@ -3,13 +3,13 @@ import Logo from "./Logo";
 import NavBar from "./NavBar";
 
 
-export default function Header ({categories, checkCategories, checkCurrency, showMiniCart}: any){
-    console.log(showMiniCart)
+export default function Header ({checkCurrency, showMiniCart, style}: any){
+    let classHeader = ['header', style? 'fixed':'']
     return (
-        <div className="header">
-            <NavBar categories={categories} checkCategories={checkCategories} />
+        <div className={classHeader.join(' ')}>
+            <NavBar />
             <Logo />
-            <Action checkCurrency={checkCurrency} showMiniCart={showMiniCart}/>
+            <Action />
         </div>
     );
 }

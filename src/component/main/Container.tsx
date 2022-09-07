@@ -1,10 +1,15 @@
+import { useContext } from "react";
 import ProductCart from "./PoductCard";
-import { IProductForMain } from "../interfaces";
+import { IProductForMain, IStorePropsObj } from "../interfaces";
+import { StoreContext } from "../../App";
 
-export default function Container({product, showProduct}: any){
+export default function Container(){
+    const {productArrayForMain}: IStorePropsObj = useContext(StoreContext);
     return(
         <div className="main-container_product">
-            {product.map((item: IProductForMain)=> {return <ProductCart product={item} showProduct={showProduct} key={item.id}/>})}
+            {productArrayForMain.map((item: IProductForMain)=> {
+                return <ProductCart item={item} key={item.id}/>})
+                }
         </div>
     )
 }
