@@ -64,6 +64,7 @@ export interface IProductPriceItem {
 export interface ICart {
     id: string;
     count: number;
+    price: number;
     params: Map<string, string>;
 }
 

@@ -1,15 +1,8 @@
 import { IProductAttributes, IProductAttributesItems} from '../interfaces';
 
 export default function ProductAttributes({attributes}:IProductAttributes){
-    const attributesHandler = (e:React.MouseEvent) => {
-        document.querySelectorAll(`#product-card-${attributes.name.toLowerCase()}`).forEach((element:Element)=>{
-            element.classList.remove('active');
-        })
-        if((e.target as HTMLElement).id === `product-card-${attributes.name.toLowerCase()}`){
-            (e.target as HTMLElement).classList.add('active');
-        } else if ((e.target as HTMLElement).innerHTML){
-            (e.target as HTMLElement).parentElement?.classList.add('active');
-        }
+    const attributesHandler = (e: React.MouseEvent) => {
+        (e.target as HTMLElement).classList.add('active');
     }
 
     return (

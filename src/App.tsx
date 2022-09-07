@@ -74,7 +74,7 @@ export default function App() {
     product: [setProduct, productDataForCard],
     categoriesName: [setCategoriesName, categories, categoriesName],
     cart: cart.current,
-    productArrayForMain: productArrayForMain,
+    productArrayForMain: productArrayForMain
   })
 
   return (

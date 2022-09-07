@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState} from "react";
 import MiniCart from '../cart/MiniCart';
 
 
 export default function Cart(){
-    const [cartSate, setCartState] = useState(false)
+    const [cartSate, setCartState] = useState(false);
     const cartHide = (e: React.MouseEvent) => {
         if((e.target as HTMLElement).className === 'dark-body'){
             setCartState(false)

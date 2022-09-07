@@ -3,13 +3,16 @@ import { ICart, IStorePropsObj } from '../interfaces';
 import { StoreContext } from '../../App';
 
 interface IBtnAddToCart {
-    product: ICart
+    item: ICart
 }
 
-export default function BtnAddToCart({product}: IBtnAddToCart){
-    const {cart}: IStorePropsObj = useContext(StoreContext)
+export default function BtnAddToCart({item}: IBtnAddToCart){
+    const {cart}: IStorePropsObj = useContext(StoreContext);
     const handleClick = () =>{
-        if(product.count) cart.push(product);
+        if(item.id){
+            cart.push(item);
+        }
+        console.log(cart)
     }
 
     return(

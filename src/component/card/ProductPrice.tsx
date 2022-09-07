@@ -2,21 +2,27 @@ import { useContext } from 'react';
 import { IProductPrice, IStorePropsObj } from '../interfaces';
 import { StoreContext } from '../../App';
 
+interface IProductPropsPrice {
+    setPrice: (value:number) => void;
+}
 
-export default function ProductPrice(){
+export default function ProductPrice({setPrice}: IProductPropsPrice){
     const {product, currency}: IStorePropsObj = useContext(StoreContext);
     let sectionName: string = '';
-    let itemPrice: string = ':(';
+    let value: number = 0;
+    let symbol: string = ':(';
     product[1]?.prices.forEach((price:IProductPrice)=>{
         if(price.currency.label === currency[1]) {
-            itemPrice = `${price.amount} ${price.currency.symbol}`;
+            value = price.amount;
+            symbol = price.currency.symbol;
             sectionName = price.__typename as string;
         }
     })
+    setPrice(value)
     return(
         <div className="product-card-main-info-price">
             <h3>{sectionName}</h3>
-            <p>{itemPrice}</p>
+            <p>{`${value} ${symbol}`}</p>
         </div>
     )
 }
