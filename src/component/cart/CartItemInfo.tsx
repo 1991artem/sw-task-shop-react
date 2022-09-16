@@ -3,11 +3,11 @@ import CartAttributes from './CartAttributes';
 import CartItemPrice from './CartItemPrice';
 
 interface ICartItemInfo {
-    product: IProduct
+    product: IProduct;
+    params: Map<string, string>;
 }
 
-export default function CartItemInfo({product}: ICartItemInfo){
-
+export default function CartItemInfo({product, params}: ICartItemInfo){
     return(
         <div className="product-mini-card-main-info">
             <h2 className="product-card-mimi-main-info-title">{product.name}</h2>
@@ -15,7 +15,7 @@ export default function CartItemInfo({product}: ICartItemInfo){
             {
                 product.attributes.map((attributes:IAttributes)=>{
                     return(
-                        <CartAttributes attributes={attributes} key={Date.now()*Math.random()}/>
+                        <CartAttributes attributes={attributes} params={params} key={Date.now()*Math.random()}/>
                     )
                 } )
             }

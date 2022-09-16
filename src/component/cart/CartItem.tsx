@@ -9,9 +9,10 @@ interface ICartItem {
 }
 export default function CartItem({item}: ICartItem){
     let product = DataFilter.filterDataForCart(item);
+    console.log(product)
     return(
         <div className='mini-cart-item'>
-            <CartItemInfo product={product}/>
+            <CartItemInfo product={product} params={item.params}/>
             <CartCounter count={item.count}/>
             <CartImg img={product.gallery}/>
         </div>

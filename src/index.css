@@ -389,3 +389,6 @@ button:hover {
   border: none !important;
   color: white;
 }
+.chose-value {
+  background-color: #5ECE7B;
+}

@@ -8,7 +8,7 @@ export default function MiniCart(){
     const {cart, currency}:IStorePropsObj = useContext(StoreContext);
     let totalPrice = 0;
     cart.forEach((item: ICart)=>{
-        totalPrice += item.price;
+        totalPrice += item.price * item.count;
     })
 
     return(

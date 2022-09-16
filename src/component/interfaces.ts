@@ -49,6 +49,7 @@ export interface IAttributes{
 
 export interface IProductAttributes{
     attributes: IAttributes;
+    params?: Map<string, string>
 }
 
 export interface IProductAttributesItems {
