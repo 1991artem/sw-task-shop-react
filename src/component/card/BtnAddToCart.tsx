@@ -36,15 +36,19 @@ export default function BtnAddToCart(){
             if(cart.length === 0){
                 cart.push(productToCart);
             } else {
+                let add: boolean = false;
                 for(let i = 0; i < cart.length; i++){
-                    if((cart[i].id === productToCart.id) && (JSON.stringify(Array.from(productToCart.params)) === JSON.stringify(Array.from(cart[i].params)))){
-                        console.log(JSON.stringify(Array.from(productToCart.params)) === JSON.stringify(Array.from(cart[i].params)))
-                        cart[i].count++;
+                    if(cart[i].id === productToCart.id){
+                        if(Array.from(productToCart.params).join('') === Array.from(cart[i].params).join('')){
+                            cart[i].count++;
+                            add = true;
+                            break;
+                        }
                     } else {
-                        console.log('not ++')
                         cart.push(productToCart);
                     }
                 }
+                if(!add)cart.push(productToCart);
             }
         }
         setState(state?false:true)
