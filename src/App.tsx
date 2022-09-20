@@ -47,9 +47,11 @@ export default function App() {
   const [categoriesName, setCategoriesName] = useState('all');
   const [currency, setCurrency] = useState('USD');
   const [product, setProduct] = useState('');
+  const [mainCart, setMainCart] = useState(false);
   const cart = useRef([])
   useEffect(()=>{
     setProduct('');
+    setMainCart(false);
   },[categoriesName])
 
   if(loading) return <div><p>...Loading</p></div>;
@@ -59,7 +61,8 @@ export default function App() {
 
   const handlerHide = (e: Event) => {
     if((e.target as HTMLElement).className === "header"){
-        setProduct('')
+        setProduct('');
+        setMainCart(false);
     }
   }
 
@@ -74,15 +77,17 @@ export default function App() {
     product: [setProduct, productDataForCard],
     categoriesName: [setCategoriesName, categories, categoriesName],
     cart: cart.current,
+    mainCart: [setMainCart, mainCart],
     productArrayForMain: productArrayForMain
   })
+
 
   return (
     <StoreContext.Provider value={STORE_PROPS_OBJ}>
     <div className='wrapper'>
       <Header />
       {
-      product? <ProductCardPage /> : <Main />
+      !mainCart && product? <ProductCardPage /> : <Main />
       }
     </div>
     </StoreContext.Provider>

@@ -84,5 +84,6 @@ export interface IStorePropsObj {
         string
     ];
     cart: ICart[];
+    mainCart: [(cart: boolean)=> void, boolean];
     productArrayForMain: IProductForMain[];
 }

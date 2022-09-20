@@ -3,10 +3,9 @@ import Logo from "./Logo";
 import NavBar from "./NavBar";
 
 
-export default function Header ({checkCurrency, showMiniCart, style}: any){
-    let classHeader = ['header', style? 'fixed':'']
+export default function Header (){
     return (
-        <div className={classHeader.join(' ')}>
+        <div className='header'>
             <NavBar />
             <Logo />
             <Action />

@@ -2,11 +2,9 @@ import { useContext } from 'react';
 import { IProductPrice, IStorePropsObj } from '../interfaces';
 import { StoreContext } from '../../App';
 
-interface IProductPropsPrice {
-    setPrice: (value:number) => void;
-}
 
-export default function ProductPrice({setPrice}: IProductPropsPrice){
+
+export default function ProductPrice(){
     const {product, currency}: IStorePropsObj = useContext(StoreContext);
     let sectionName: string = '';
     let value: number = 0;
@@ -18,7 +16,6 @@ export default function ProductPrice({setPrice}: IProductPropsPrice){
             sectionName = price.__typename as string;
         }
     })
-    setPrice(value)
     return(
         <div className="product-card-main-info-price">
             <h3>{sectionName}</h3>
