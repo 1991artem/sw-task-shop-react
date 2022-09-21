@@ -23,7 +23,6 @@ export default function BtnAddToCart(){
                     let attrList = element[i].children[1].children
                     for(let j = 0; j < attrList.length; j++){
                         if(attrList[j].className === 'product-card-main-info-attributes_value active'){
-                            console.log(attrList[j])
                             productToCart.params.set(element[i].children[0].innerHTML, attrList[j].innerHTML)
                         }
                     }
@@ -31,28 +30,24 @@ export default function BtnAddToCart(){
                 if(element[i].className === 'product-card-main-info-price') productToCart.price = Number(element[i].children[1].innerHTML.split(' ')[0]);
             }
         }
-        //cart.push(productToCart);
         if(productToCart.id){
             if(cart.length === 0){
                 cart.push(productToCart);
             } else {
-                let add: boolean = false;
+                let add: boolean = true;
                 for(let i = 0; i < cart.length; i++){
                     if(cart[i].id === productToCart.id){
                         if(Array.from(productToCart.params).join('') === Array.from(cart[i].params).join('')){
                             cart[i].count++;
-                            add = true;
+                            add = false;
                             break;
                         }
-                    } else {
-                        cart.push(productToCart);
                     }
                 }
-                if(!add)cart.push(productToCart);
+                if(add)cart.push(productToCart);
             }
         }
         setState(state?false:true)
-        console.log(cart)
     }
 
     return(

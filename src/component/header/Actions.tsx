@@ -1,7 +1,7 @@
 import Cart from "./Cart"
 import Currency from "./Currency"
 
-export default function Action({showMiniCart}:any){
+export default function Action(){
     return (
         <div className="header-actions">
             <div className="header-actions_empty"></div>

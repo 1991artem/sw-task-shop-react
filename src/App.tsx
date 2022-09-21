@@ -1,10 +1,11 @@
-import React, { useEffect, useState, createContext, useRef } from 'react';
+import { useEffect, useState, createContext, useRef } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { IStorePropsObj, IProduct, IProductForMain} from './component/interfaces';
 import Header from './component/header/Header';
 import Main from './component/main/Main';
 import ProductCardPage from './component/card/ProductCardPage';
 import { DataFilter } from './component/DataFilter';
+import Loading from './component/Loading';
 
 const query = gql`
             query   {
@@ -54,7 +55,7 @@ export default function App() {
     setMainCart(false);
   },[categoriesName])
 
-  if(loading) return <div><p>...Loading</p></div>;
+  if(loading) return <Loading />;
   if(error) return <div><p>{`Error:  ${error.message}`}</p></div>;
 
   const DATA_FILTER: DataFilter = new DataFilter(data.categories);
@@ -78,7 +79,7 @@ export default function App() {
     categoriesName: [setCategoriesName, categories, categoriesName],
     cart: cart.current,
     mainCart: [setMainCart, mainCart],
-    productArrayForMain: productArrayForMain
+    productArrayForMain: productArrayForMain,
   })
 
 
