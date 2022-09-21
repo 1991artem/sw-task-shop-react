@@ -23,7 +23,7 @@ export function MainCartContainer(){
     return(
         <>{ state?
             <div className="cart">
-                <div className="main-title">
+                <div className="cart-title">
                     <h6>{`CART`}</h6>
                 </div>
             {
@@ -33,11 +33,11 @@ export function MainCartContainer(){
                     )
                 })
             }
-            <div>
+            <div className="cart-price-discr">
             <div className="mini-cart-total-price"><p>Tax 21%</p><h3>{`${Math.floor(totalPrice*100*0.21)/100} ${currency[1]}`}</h3></div>
             <div className="mini-cart-total-price"><p>Quantity</p><h3>{`${quantity}`}</h3></div>
             <div className="mini-cart-total-price"><p>Total</p><h3>{`${Math.floor(totalPrice*100)/100} ${currency[1]}`}</h3></div>
-                <div className="mini-cart-btn">
+                <div className="main-cart-btn">
                     <button className="cart-btn-order" onClick={endOrder}>ORDER</button>
                 </div>
             </div>

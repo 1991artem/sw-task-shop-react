@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext, useRef } from 'react';
+import { useState, createContext, useRef } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { IStorePropsObj, IProduct, IProductForMain} from './component/interfaces';
 import Header from './component/header/Header';
@@ -49,11 +49,7 @@ export default function App() {
   const [currency, setCurrency] = useState('USD');
   const [product, setProduct] = useState('');
   const [mainCart, setMainCart] = useState(false);
-  const cart = useRef([])
-  useEffect(()=>{
-    setProduct('');
-    setMainCart(false);
-  },[categoriesName])
+  const cart = useRef([]);
 
   if(loading) return <Loading />;
   if(error) return <div><p>{`Error:  ${error.message}`}</p></div>;
@@ -61,7 +57,7 @@ export default function App() {
   const DATA_FILTER: DataFilter = new DataFilter(data.categories);
 
   const handlerHide = (e: Event) => {
-    if((e.target as HTMLElement).className === "header"){
+    if((e.target as HTMLElement).className === "header" || (e.target as HTMLElement).className === "header-link"){
         setProduct('');
         setMainCart(false);
     }

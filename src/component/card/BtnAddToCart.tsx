@@ -16,7 +16,6 @@ export default function BtnAddToCart(){
     const handleClick = () =>{
         let element = document.querySelector('.product-card-main-info-btn')?.parentElement?.children;
         productToCart.count = 1;
-        console.log(element)
         if(element){
             for(let i = 0; i < element.length; i++){
                 if(element[i].className === 'product-card-main-info-attributes') {
