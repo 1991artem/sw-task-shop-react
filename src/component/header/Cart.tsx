@@ -7,9 +7,14 @@ export default function Cart(){
     const cartHide = (e: React.MouseEvent) => {
         if((e.target as HTMLElement).className === 'dark-body'){
             setCartState(false);
-            console.log(e.target)
         }
     }
+    if(!cartSate){
+        document.body.classList.remove('overflow')
+    } else {
+        document.body.classList.add('overflow')
+    }
+
     const cartHandler = (e: React.MouseEvent) => {
         setCartState(cartSate?false:true);
     }

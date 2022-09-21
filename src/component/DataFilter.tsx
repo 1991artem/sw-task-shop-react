@@ -46,8 +46,6 @@ export class DataFilter {
         return this.filterProductByCategory(categoryName).products?.filter((prod:IProduct)=> prod.id === product)[0];
     }
     static filterDataForCart(item: ICart): IProduct {
-      //DataFilter.cartSort(item)
-      console.log(item)
       let productForCart: IProduct | {} = {};
       DataFilter.data.forEach((categories: ICategories) =>{
         categories.products?.forEach((product: IProduct) => {

@@ -6,14 +6,18 @@ import CartImg from './CartImg';
 
 interface ICartItem {
     item: ICart;
+    index: number;
+    reload: {
+        reload: boolean;
+        setReload: (value: boolean) => void;
+    }
 }
-export default function CartItem({item}: ICartItem){
+export default function CartItem({item, index, reload}: ICartItem){
     let product = DataFilter.filterDataForCart(item);
-    console.log(product)
     return(
         <div className='mini-cart-item'>
             <CartItemInfo product={product} params={item.params}/>
-            <CartCounter count={item.count}/>
+            <CartCounter item={item} index={index} reload={reload}/>
             <CartImg img={product.gallery}/>
         </div>
     )
