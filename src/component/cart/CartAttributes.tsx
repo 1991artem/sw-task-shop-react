@@ -19,7 +19,8 @@ export default function CartAttributes({attributes, params}:IProductAttributes){
                 style.color = item.displayValue.toLocaleLowerCase();
             }
             for(let i = 0; i < params.params.length; i++){
-                if(params?.params[i][0] === item.displayValue) {
+                console.log(params?.params[i])
+                if(params?.params[i][1] === item.displayValue) {
                     style.border = 'solid 3px #5ECE7B';
                 };
             }
