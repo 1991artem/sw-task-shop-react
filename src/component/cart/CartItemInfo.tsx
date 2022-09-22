@@ -1,10 +1,10 @@
-import { IProduct, IAttributes } from '../interfaces';
+import { IProduct, IAttributes, ICart } from '../interfaces';
 import CartAttributes from './CartAttributes';
 import CartItemPrice from './CartItemPrice';
 
 interface ICartItemInfo {
     product: IProduct;
-    params: Map<string, string>;
+    params: ICart;
 }
 
 export default function CartItemInfo({product, params}: ICartItemInfo){

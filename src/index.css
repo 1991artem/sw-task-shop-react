@@ -293,7 +293,8 @@ button:hover {
   display: flex;
   flex-direction: row;
   border: solid 1px gainsboro;
-  margin: 0 auto;
+  margin: 5px auto;
+  padding: 5px;
 }
 .product-mini-card-main-info {
   width: 50%;

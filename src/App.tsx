@@ -1,6 +1,6 @@
-import { useState, createContext, useRef } from 'react';
+import { useState, createContext } from 'react';
 import { useQuery, gql } from '@apollo/client';
-import { IStorePropsObj, IProduct, IProductForMain} from './component/interfaces';
+import { IStorePropsObj, IProduct, IProductForMain, ICart} from './component/interfaces';
 import Header from './component/header/Header';
 import Main from './component/main/Main';
 import ProductCardPage from './component/card/ProductCardPage';
@@ -49,7 +49,7 @@ export default function App() {
   const [currency, setCurrency] = useState('USD');
   const [product, setProduct] = useState('');
   const [mainCart, setMainCart] = useState(false);
-  const cart = useRef([]);
+  const cart: ICart[] = sessionStorage.getItem('cart')?JSON.parse(sessionStorage.getItem('cart') as string):[];
 
   if(loading) return <Loading />;
   if(error) return <div><p>{`Error:  ${error.message}`}</p></div>;
@@ -73,7 +73,7 @@ export default function App() {
     currency: [setCurrency, currency],
     product: [setProduct, productDataForCard],
     categoriesName: [setCategoriesName, categories, categoriesName],
-    cart: cart.current,
+    cart: cart,
     mainCart: [setMainCart, mainCart],
     productArrayForMain: productArrayForMain,
   })

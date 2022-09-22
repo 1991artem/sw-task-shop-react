@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { IAttributes, IStorePropsObj } from '../interfaces';
+import { IAttributes, IStorePropsObj, ICart } from '../interfaces';
 import BtnAddToCart from './BtnAddToCart';
 import ProductAttributes from './ProductAttributes';
 import ProductPrice from './ProductPrice';
@@ -7,7 +7,7 @@ import { StoreContext } from '../../App';
 
 export default function ProductCardInfo(){
     const {product}: IStorePropsObj = useContext(StoreContext);
-
+    console.log(product[1])
     if(product[1]){
         return(
             <div className="product-card-main-info">
@@ -15,7 +15,7 @@ export default function ProductCardInfo(){
                 {
                     product[1].attributes.map((attributes:IAttributes)=>{
                         return(
-                            <ProductAttributes attributes={attributes} key={Date.now()*Math.random()}/>
+                            <ProductAttributes attributes={attributes} key={Date.now() * Math.random()} params={{} as ICart}/>
                         )
                     } )
                 }

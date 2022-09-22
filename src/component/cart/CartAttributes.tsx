@@ -18,9 +18,12 @@ export default function CartAttributes({attributes, params}:IProductAttributes){
                 style.border = 'solid 1px #cacecb';
                 style.color = item.displayValue.toLocaleLowerCase();
             }
-            if(params?.get(attributes.name) === item.displayValue) {
-                style.border = 'solid 3px #5ECE7B';
-            };
+            for(let i = 0; i < params.params.length; i++){
+                if(params?.params[i][0] === item.displayValue) {
+                    style.border = 'solid 3px #5ECE7B';
+                };
+            }
+
             return(
                 <div
                 className={className.join(' ')}

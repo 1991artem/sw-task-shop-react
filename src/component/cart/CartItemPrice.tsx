@@ -18,7 +18,7 @@ export default function CartItemPrice({product}: ICartItemInfo){
     return(
         <>
             <p>{sectionName}</p>
-            <p>{itemPrice}</p>
+            <h4>{itemPrice}</h4>
         </>
     )
 }

@@ -1,7 +1,7 @@
 import { IProductAttributes, IProductAttributesItems} from '../interfaces';
 import { useState } from 'react';
 
-export default function ProductAttributes({attributes}:IProductAttributes){
+export default function ProductAttributes({attributes, params}:IProductAttributes){
     const [select, setSelect] = useState(attributes? attributes.items[0].displayValue:'');
     const attributesHandler = (e: React.MouseEvent) => {
         setSelect((e.target as HTMLElement).innerHTML);

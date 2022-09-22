@@ -16,7 +16,7 @@ export default function CartItem({item, index, reload}: ICartItem){
     let product = DataFilter.filterDataForCart(item);
     return(
         <div className='mini-cart-item'>
-            <CartItemInfo product={product} params={item.params}/>
+            <CartItemInfo product={product} params={item}/>
             <CartCounter item={item} index={index} reload={reload}/>
             <CartImg img={product.gallery}/>
         </div>

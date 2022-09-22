@@ -49,7 +49,7 @@ export interface IAttributes{
 
 export interface IProductAttributes{
     attributes: IAttributes;
-    params?: Map<string, string>
+    params: ICart
 }
 
 export interface IProductAttributesItems {
@@ -66,7 +66,7 @@ export interface ICart {
     id: string;
     count: number;
     price: number;
-    params: Map<string, string>;
+    params: Array<string>[];
 }
 
 export interface IStorePropsObj {
