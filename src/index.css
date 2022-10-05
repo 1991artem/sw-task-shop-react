@@ -270,6 +270,11 @@ button:hover {
   height: 595px;
   width: 80px;
   margin: 0 10px;
+  overflow-y: auto;
+}
+.product-card-img-container_mini::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 .dark-body{
   left: 0;

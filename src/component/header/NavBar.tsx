@@ -10,17 +10,19 @@ export default function NavBar() {
         <div className="nav">
             <ul>
                 <li className="link">
-                    <NavLink to={`/${data[0].name}`} className="header-link">
+                    <NavLink to={`${data[0].name}`} className={({isActive})=>
+                    isActive || ['/', '/all', '/index', '/home', '/card'].includes(document.location.pathname)?
+                    'header-link active': "header-link"}>
                         {data[0].name}
                     </NavLink>
                 </li>
                 <li className="link">
-                    <NavLink to={`/${data[1].name}`} className="header-link">
+                    <NavLink to={`${data[1].name}`} className="header-link">
                         {data[1].name}
                     </NavLink>
                 </li>
                 <li className="link">
-                    <NavLink to={`/${data[2].name}`} className="header-link">
+                    <NavLink to={`${data[2].name}`} className="header-link">
                         {data[2].name}
                     </NavLink>
                 </li>
