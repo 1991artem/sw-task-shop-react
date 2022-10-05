@@ -1,15 +1,20 @@
-import { useContext } from "react";
-import ProductCart from "./PoductCard";
-import { IProductForMain, IStorePropsObj } from "../interfaces";
-import { StoreContext } from "../../App";
+import {ProductCard} from "./ProductCard";
+import { ICategories, IProduct } from "../interfaces";
+import Title from "./Title";
 
-export default function Container(){
-    const {productArrayForMain}: IStorePropsObj = useContext(StoreContext);
-    return(
-        <div className="main-container_product">
-            {productArrayForMain.map((item: IProductForMain)=> {
-                return <ProductCart item={item} key={item.id}/>})
-                }
-        </div>
-    )
+interface IContainer {
+  category: ICategories
+}
+
+export function Container({category}: IContainer) {
+  return (
+    <>
+    <Title name={category.name}></Title>
+      <div className="main-container_product">
+        {category.products.map((item: IProduct) => {
+          return <ProductCard item={item} key={item.id} />;
+        })}
+      </div>
+    </>
+  );
 }

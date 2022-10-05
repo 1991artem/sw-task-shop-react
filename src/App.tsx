@@ -1,11 +1,11 @@
 import { useState, createContext } from 'react';
 import { useQuery, gql } from '@apollo/client';
-import { IStorePropsObj, IProduct, IProductForMain, ICart} from './component/interfaces';
+import { IStorePropsObj, ICart} from './component/interfaces';
 import Header from './component/header/Header';
 import Main from './component/main/Main';
-import ProductCardPage from './component/card/ProductCardPage';
+import Scandiweb from './component/Scandiweb';
+import { ErrorPage } from './component/ErrorPage';
 import { DataFilter } from './component/DataFilter';
-import Loading from './component/Loading';
 
 const query = gql`
             query   {
@@ -45,47 +45,25 @@ export const StoreContext = createContext({} as IStorePropsObj);
 
 export default function App() {
   const {loading, error, data} = useQuery(query);
-  const [categoriesName, setCategoriesName] = useState('all');
   const [currency, setCurrency] = useState('USD');
-  const [product, setProduct] = useState('');
-  const [mainCart, setMainCart] = useState(false);
-  const cart: ICart[] = sessionStorage.getItem('cart')?JSON.parse(sessionStorage.getItem('cart') as string):[];
+  const cart: ICart[] = localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart') as string):[];
 
-  if(loading) return <Loading />;
-  if(error) return <div><p>{`Error:  ${error.message}`}</p></div>;
+  if(loading) return <Scandiweb />;
+  if(error) return <ErrorPage />;
 
-  const DATA_FILTER: DataFilter = new DataFilter(data.categories);
-
-  const handlerHide = (e: Event) => {
-    if((e.target as HTMLElement).className === "header" || (e.target as HTMLElement).className === "header-link"){
-        setProduct('');
-        setMainCart(false);
-    }
-  }
-
-  document.body.addEventListener('click', handlerHide, true)
-
-  let productArrayForMain: IProductForMain[] = DATA_FILTER.filterConfigProductForMainCatalog(categoriesName, currency);
-  let productDataForCard: IProduct | undefined = DATA_FILTER.getProductDataForCard(categoriesName, product);
-  let categories: string[] = DATA_FILTER.separateСategoriesName()
+  const dataFilter: DataFilter =  new DataFilter(data.categories)
 
   const STORE_PROPS_OBJ: IStorePropsObj = ({
     currency: [setCurrency, currency],
-    product: [setProduct, productDataForCard],
-    categoriesName: [setCategoriesName, categories, categoriesName],
     cart: cart,
-    mainCart: [setMainCart, mainCart],
-    productArrayForMain: productArrayForMain,
+    data: data.categories,
   })
-
 
   return (
     <StoreContext.Provider value={STORE_PROPS_OBJ}>
     <div className='wrapper'>
       <Header />
-      {
-      !mainCart && product? <ProductCardPage /> : <Main />
-      }
+      <Main />
     </div>
     </StoreContext.Provider>
   );

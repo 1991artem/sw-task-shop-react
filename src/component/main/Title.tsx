@@ -1,12 +1,11 @@
-import { useContext } from "react";
-import { IStorePropsObj } from "../interfaces";
-import { StoreContext } from "../../App";
+interface ITitle {
+    name: string
+}
 
-export default function Title(){
-    const {categoriesName}: IStorePropsObj = useContext(StoreContext);
+export default function Title({name}:ITitle){
     return (
         <div className="main-title">
-            <p>{`Category ${categoriesName[2]}`}</p>
+            <p>{`Category ${name}`}</p>
         </div>
     )
 }

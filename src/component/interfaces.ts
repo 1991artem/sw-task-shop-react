@@ -1,7 +1,6 @@
-
 export interface ICategories {
     name: string;
-    products?: IProduct[];
+    products: IProduct[];
     __typename: string
 }
 
@@ -14,7 +13,7 @@ export interface IProduct {
     id: string;
     inStock: boolean
     name: string;
-    prices: [];
+    prices: IProductPrice[];
     __typename?: string;
 }
 
@@ -61,6 +60,9 @@ export interface IProductPriceItem {
     price: IProductPrice[];
     currency:string;
 }
+export interface IProductTransfer {
+    product: IProduct
+}
 
 export interface ICart {
     id: string;
@@ -74,16 +76,6 @@ export interface IStorePropsObj {
         (currency: string)=> void,
         string
     ];
-    product: [
-        (product: string)=> void,
-        IProduct | undefined
-    ];
-    categoriesName: [
-        (product: string)=> void,
-        string[],
-        string
-    ];
     cart: ICart[];
-    mainCart: [(cart: boolean)=> void, boolean];
-    productArrayForMain: IProductForMain[];
+    data: ICategories[];
 }

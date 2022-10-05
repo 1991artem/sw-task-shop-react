@@ -1,8 +1,8 @@
 import { ICart } from '../interfaces';
-import { DataFilter } from '../DataFilter';
 import CartItemInfo from './CartItemInfo';
 import CartCounter from './CartCounter';
 import CartImg from './CartImg';
+import { DataFilter } from '../DataFilter';
 
 interface ICartItem {
     item: ICart;
@@ -13,7 +13,7 @@ interface ICartItem {
     }
 }
 export default function CartItem({item, index, reload}: ICartItem){
-    let product = DataFilter.filterDataForCart(item);
+    let product = DataFilter.getProductDataForCard(item.id)
     return(
         <div className='mini-cart-item'>
             <CartItemInfo product={product} params={item}/>

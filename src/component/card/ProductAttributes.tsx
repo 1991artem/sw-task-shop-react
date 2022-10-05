@@ -15,7 +15,7 @@ export default function ProductAttributes({attributes, params}:IProductAttribute
             attributes.items.map((item:IProductAttributesItems)=>{
                 return(
                     <li
-                    className={item.displayValue === select? 'product-card-main-info-attributes_value active': 'product-card-main-info-attributes_value'}
+                    className={item.displayValue === select? 'product-card-main-info-attributes_value choise-active': 'product-card-main-info-attributes_value'}
                     data-value={`${attributes.name};${item.displayValue}`}
                     onClick={attributesHandler}
                     key={Date.now()*Math.random()}>

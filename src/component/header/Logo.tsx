@@ -1,13 +1,6 @@
-import { useContext } from "react";
-import { StoreContext } from "../../App";
-
 export default function Logo(){
-    const {mainCart} = useContext(StoreContext)
-    const clickLogo = () => {
-        mainCart[0](mainCart[1]? false: true);
-    }
     return (
-        <div className="header-logo" onClick={clickLogo}>
+        <div className="header-logo">
             <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_150_357)">
                 <path d="M34.0222 28.6646C34.0494 28.983 33.8009 29.2566 33.4846 29.2566H7.46924C7.15373 29.2566 6.90553 28.9843 6.93156 28.6665L8.7959 5.91227C8.8191 5.62962 9.05287 5.41211 9.33372 5.41211H31.5426C31.8226 5.41211 32.0561 5.62853 32.0801 5.91036L34.0222 28.6646Z" fill="#1DCF65"/>

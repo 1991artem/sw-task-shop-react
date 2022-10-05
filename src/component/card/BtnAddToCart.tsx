@@ -1,13 +1,13 @@
 import { useContext, useState } from "react";
-import { ICart, IStorePropsObj } from '../interfaces';
+import { ICart, IProductTransfer, IStorePropsObj } from '../interfaces';
 import { StoreContext } from '../../App';
 
 
-export default function BtnAddToCart(){
-    const {cart, product}: IStorePropsObj = useContext(StoreContext);
+export default function BtnAddToCart({product}: IProductTransfer){
+    const {cart}: IStorePropsObj = useContext(StoreContext);
     const [state, setState] = useState(false)
     let productToCart: ICart = {
-        id: product[1]?.id as string,
+        id: product.id as string,
         count: 0,
         price: 0,
         params: []
@@ -21,7 +21,7 @@ export default function BtnAddToCart(){
                 if(element[i].className === 'product-card-main-info-attributes') {
                     let attrList = element[i].children[1].children
                     for(let j = 0; j < attrList.length; j++){
-                        if(attrList[j].className === 'product-card-main-info-attributes_value active'){
+                        if(attrList[j].className === 'product-card-main-info-attributes_value choise-active'){
                             productToCart.params.push([element[i].children[0].innerHTML, attrList[j].innerHTML])
                         }
                     }
@@ -29,7 +29,6 @@ export default function BtnAddToCart(){
                 if(element[i].className === 'product-card-main-info-price') productToCart.price = Number(element[i].children[1].innerHTML.split(' ')[0]);
             }
         }
-        console.log(productToCart.params)
         if(productToCart.id){
             if(cart.length === 0){
                 cart.push(productToCart);
@@ -47,7 +46,7 @@ export default function BtnAddToCart(){
                 if(add)cart.push(productToCart);
             }
         }
-        sessionStorage.setItem('cart', JSON.stringify(cart))
+        localStorage.setItem('cart', JSON.stringify(cart))
         setState(state?false:true)
     }
 

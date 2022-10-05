@@ -5,7 +5,7 @@ import CartItem from "../cart/CartItem";
 import EndWindow from '../EndWindow';
 
 export function MainCartContainer(){
-    const {cart, currency}:IStorePropsObj = useContext(StoreContext);
+    const {cart, currency }:IStorePropsObj = useContext(StoreContext);
     const [state, setState] = useState(true);
     const [reload, setReload] = useState(false);
     const reloadCart = {reload: reload, setReload: setReload}
@@ -16,6 +16,8 @@ export function MainCartContainer(){
         quantity += item.count;
     })
     const endOrder = () => {
+        cart.length = 0;
+        localStorage.removeItem('cart');
         setState(false)
         setTimeout(()=>{window.location.reload()},1500);
     }
@@ -38,7 +40,7 @@ export function MainCartContainer(){
             <div className="mini-cart-total-price"><p>Quantity</p><h3>{`${quantity}`}</h3></div>
             <div className="mini-cart-total-price"><p>Total</p><h3>{`${Math.floor(totalPrice*100)/100} ${currency[1]}`}</h3></div>
                 <div className="main-cart-btn">
-                    <button className="cart-btn-order" onClick={endOrder}>ORDER</button>
+                    <button className="cart-btn-order" onClick={endOrder}>ERASE ALL</button>
                 </div>
             </div>
             </div>

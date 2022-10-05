@@ -3,13 +3,14 @@ import { IStorePropsObj, ICart } from '../interfaces';
 import { StoreContext } from "../../App";
 import CartItem from "./CartItem";
 import EndWindow from "../EndWindow";
+import { NavLink } from "react-router-dom";
 
 interface IMiniCart {
     hide: (value:boolean)=> void
 }
 
 export default function MiniCart({hide}:IMiniCart){
-    const {cart, currency, mainCart }:IStorePropsObj = useContext(StoreContext);
+    const {cart, currency }:IStorePropsObj = useContext(StoreContext);
     const [state, setState] = useState(true);
     const [reload, setReload] = useState(false);
     const reloadCart = {reload: reload, setReload: setReload}
@@ -18,11 +19,12 @@ export default function MiniCart({hide}:IMiniCart){
         totalPrice += item.price * item.count;
     })
     const viewBag = () => {
-        mainCart[0](true)
         hide(false)
     }
 
     const endOrder = () => {
+        cart.length = 0;
+        localStorage.removeItem('cart');
         setState(false)
         setTimeout(()=>{window.location.reload()},1500);
     }
@@ -40,8 +42,8 @@ export default function MiniCart({hide}:IMiniCart){
                     }
                         <div className="mini-cart-total-price"><h3>Total</h3><h3>{`${Math.floor(totalPrice*100)/100} ${currency[1]}`}</h3></div>
                         <div className="mini-cart-btn">
-                            <button onClick={viewBag}>VIEW BAG</button>
-                            <button className="cart-btn-order" onClick={endOrder}>ORDER</button>
+                            <NavLink to="/cart" className="cart-btn-view" onClick={viewBag}><p>VIEW BAG</p></NavLink>
+                            <button className="cart-btn-order" onClick={endOrder}>ERASE ALL</button>
                         </div>
                     </div>
                 </div>

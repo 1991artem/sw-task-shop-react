@@ -15,11 +15,10 @@ export default function CartAttributes({attributes, params}:IProductAttributes){
             let className:string[] = ['product-mini-card-main-info-attributes_value'];
             if(attributes.name === 'Color'){
                 style.backgroundColor = item.displayValue.toLocaleLowerCase();
-                style.border = 'solid 1px #cacecb';
+                style.border = 'solid 3px #cacecb';
                 style.color = item.displayValue.toLocaleLowerCase();
             }
             for(let i = 0; i < params.params.length; i++){
-                console.log(params?.params[i])
                 if(params?.params[i][1] === item.displayValue) {
                     style.border = 'solid 3px #5ECE7B';
                 };

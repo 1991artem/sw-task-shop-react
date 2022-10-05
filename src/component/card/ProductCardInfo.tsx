@@ -1,31 +1,22 @@
-import { useContext } from 'react';
-import { IAttributes, IStorePropsObj, ICart } from '../interfaces';
+import { IAttributes, ICart, IProductTransfer } from '../interfaces';
 import BtnAddToCart from './BtnAddToCart';
 import ProductAttributes from './ProductAttributes';
 import ProductPrice from './ProductPrice';
-import { StoreContext } from '../../App';
 
-export default function ProductCardInfo(){
-    const {product}: IStorePropsObj = useContext(StoreContext);
-    console.log(product[1])
-    if(product[1]){
+export default function ProductCardInfo({product}:IProductTransfer){
         return(
             <div className="product-card-main-info">
-                <h2 className="product-card-main-info-title">{product[1].name}</h2>
+                <h2 className="product-card-main-info-title">{product.name}</h2>
                 {
-                    product[1].attributes.map((attributes:IAttributes)=>{
+                    product.attributes.map((attributes:IAttributes)=>{
                         return(
                             <ProductAttributes attributes={attributes} key={Date.now() * Math.random()} params={{} as ICart}/>
                         )
                     } )
                 }
-                <ProductPrice />
-                <BtnAddToCart />
-                <div dangerouslySetInnerHTML={{__html: product[1].description}}></div>
+                <ProductPrice product={product}/>
+                <BtnAddToCart product={product}/>
+                <div dangerouslySetInnerHTML={{__html: product.description}}></div>
             </div>
         )
-    } else return (
-        <div className="product-card-main-info"></div>
-    )
-
 }
