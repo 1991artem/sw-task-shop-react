@@ -153,7 +153,6 @@ button:hover {
 .main-container_product-card_img img {
   height: 330px;
   margin: 0 auto;
-  border: solid 1px #5ECE7B;
 }
 .main-container_product-card p {
   font-family: 'Raleway';
